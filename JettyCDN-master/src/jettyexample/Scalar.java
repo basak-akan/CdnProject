@@ -22,12 +22,14 @@ public class Scalar {
 	 * @return path of geneterated tumbnail.
 	 * @throws Exception
 	 */
-	public String scale(String path, String fileName) throws Exception {
+	public BufferedImage scale(String path, String fileName) throws Exception {
 		BufferedImage originalImage = ImageIO.read(new File(path));
 		BufferedImage resizedCopy = createResizedCopy(originalImage, 50, 50, true);
-		File tosave = new File(TUMBNAILS + fileName);
-		ImageIO.write(resizedCopy, "jpg", tosave);
-		return tosave.getAbsolutePath();
+		return resizedCopy;
+
+		// File tosave = new File(TUMBNAILS + fileName);
+		// ImageIO.write(resizedCopy, "jpg", tosave);
+		// return tosave.getAbsolutePath();
 	}
 
 	/**
@@ -43,14 +45,29 @@ public class Scalar {
 	 * @return path of geneterated tumbnail.
 	 * @throws Exception
 	 */
-	public String scale(String path, int width, int height, String filename) throws Exception {
+	public BufferedImage scale(String path, int width, int height, String filename) throws Exception {
 		BufferedImage originalImage = ImageIO.read(new File(path));
 		BufferedImage resizedCopy = createResizedCopy(originalImage, width, height, true);
-		File tosave = new File(TUMBNAILS + filename);
-		ImageIO.write(resizedCopy, "jpg", tosave);
-		return tosave.getAbsolutePath();
+		// File tosave = new File(TUMBNAILS + filename);
+		// ImageIO.write(resizedCopy, "jpg", tosave);
+		// return tosave.getAbsolutePath();
+		return resizedCopy;
 	}
 
+	public BufferedImage scale(BufferedImage originalImage, int width, int height) throws Exception {
+		BufferedImage resizedCopy = createResizedCopy(originalImage, width, height, true);
+		// File tosave = new File(TUMBNAILS + filename);
+		// ImageIO.write(resizedCopy, "jpg", tosave);
+		// return tosave.getAbsolutePath();
+		return resizedCopy;
+	}
+
+	public BufferedImage grayAndScale(BufferedImage originalImage, int width, int height) throws Exception {
+		originalImage = scale(originalImage, width, height);
+		originalImage = toGray(originalImage);
+		return originalImage;
+
+	}
 	/**
 	 * Merges given images with path parameters into a new image
 	 * @param path1 File path of first image
@@ -76,12 +93,20 @@ public class Scalar {
 	 * @return path of geneterated tumbnail.
 	 * @throws Exception
 	 */
-	public String toGray(String path, String name) throws Exception {
-		BufferedImage originalImage = ImageIO.read(new File(path));
+	/*
+	 * public BufferedImage toGray(String path, String name) throws Exception {
+	 * BufferedImage originalImage = ImageIO.read(new File(path)); BufferedImage
+	 * resizedCopy = convertGrayScale(originalImage); // File tosave = new
+	 * File(TUMBNAILS + name); // ImageIO.write(resizedCopy, "jpg", tosave); //
+	 * return tosave.getAbsolutePath(); return resizedCopy; }
+	 */
+
+	public BufferedImage toGray(BufferedImage originalImage) throws Exception {
 		BufferedImage resizedCopy = convertGrayScale(originalImage);
-		File tosave = new File(TUMBNAILS + name);
-		ImageIO.write(resizedCopy, "jpg", tosave);
-		return tosave.getAbsolutePath();
+		// File tosave = new File(TUMBNAILS + name);
+		// ImageIO.write(resizedCopy, "jpg", tosave);
+		// return tosave.getAbsolutePath();
+		return resizedCopy;
 	}
 
 	/**
@@ -123,7 +148,6 @@ public class Scalar {
 	private BufferedImage convertGrayScale(BufferedImage originalImage) {
 		int width = originalImage.getWidth();
 		int height = originalImage.getHeight();
-
 		BufferedImage newImg = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
 
 		for (int i = 0; i < height; i++) {
@@ -182,11 +206,12 @@ public class Scalar {
 	}
 	
 	private static void merge() throws Exception{
-		Scalar scalar = new Scalar();
-		String path1 = scalar.scale("./img/france.jpg", 50, 50, "first.jpg");
-		String path2 = scalar.scale("./img/nature.jpg", 50, 50, "second.jpg");
-		String merge = scalar.merge(path1, path2, "merged.jpg");
-		scalar.toGray("./img/tumbnails/merged.jpg","merged.jpg");
+		// Scalar scalar = new Scalar();
+		// String path1 = scalar.scale("./img/france.jpg", 50, 50, "first.jpg");
+		// String path2 = scalar.scale("./img/nature.jpg", 50, 50,
+		// "second.jpg");
+		// String merge = scalar.merge(path1, path2, "merged.jpg");
+		// scalar.toGray("./img/tumbnails/merged.jpg","merged.jpg");
 	}
 	
 	/*public String grayAndScale (String path, int width, int height, String filename)throws Exception{
